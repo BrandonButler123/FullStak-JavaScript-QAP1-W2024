@@ -6,7 +6,7 @@
 
 var url = require("url");
 // initialize the url module
-var adr = "http://localhost:3009/default.htm?year=2024&month=january&day=19";
+var adr = "http://localhost:3009/default.htm?year=2024&month=January&day=19";
 // create a variable with a url string
 var q = url.parse(adr, true);
 // parse() method takes a URL string, parses it, and returns a URL object

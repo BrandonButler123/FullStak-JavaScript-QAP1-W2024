@@ -5,25 +5,20 @@
 // it an essential module for building file-centric applications and managing data persistence in a
 // server-side environment.
 
-var http = require("http");
-// initialize the http module
-var fs = require("fs");
 // initialize the fs module
+var fs = require("fs");
+// Specify the content to be written to the file
+var contentToWrite = "Hello, this is the content to be written to the file.";
+// Specify the file path and name
+var filePath = "output.txt";
 
-http
-  .createServer(function (req, res) {
-    // createServer() method creates an HTTP server object
-    fs.readFile("sample.html", function (err, data) {
-      // readFile() method reads the contents of a file
-      res.writeHead(200, { "Content-Type": "text/html" });
-      // writeHead() method writes a response header to the request
-      res.write(data);
-      // write() method writes a response to the client
-      console.log("server is running on port 3010");
-      // console.log() method to inform the user that the server is running
-      return res.end();
-      // end() method ends the response process
+// Open the file and create it if it doesn't exist
+fs.open(filePath, "wx", function (err, fd) {
+  // Write the content to the file
+  fs.writeFile(fd, contentToWrite, function (err) {
+    // Close the file descriptor
+    fs.close(fd, function () {
+      console.log(`Data has been written to ${filePath}`);
     });
-  })
-  .listen(3010);
-// listen() method makes the server object listen to the specified port
+  });
+});
